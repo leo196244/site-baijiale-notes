@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再访 · 澳客笔记</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f6fafc;
+            color: #1e293b;
+            line-height: 1.7;
+            padding: 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .page {
+            max-width: 820px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+        /* 网格卡片式正文背景 */
+        .content-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2.2rem 2rem;
+            box-shadow: 0 8px 24px rgba(0, 90, 100, 0.06);
+            border: 1px solid #dceef2;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(2px);
+            transition: box-shadow 0.2s;
+        }
+        .content-card:hover {
+            box-shadow: 0 12px 30px rgba(0, 120, 130, 0.08);
+        }
+        /* 蓝绿色点缀 */
+        .accent {
+            color: #0b7e8c;
+        }
+        .accent-bg {
+            background: #e1f2f5;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+            color: #0f2f35;
+        }
+        .subhead {
+            font-size: 1.1rem;
+            color: #3b6e78;
+            margin-bottom: 2rem;
+            border-left: 4px solid #30a7b3;
+            padding-left: 1rem;
+            font-weight: 380;
+        }
+        .meta-line {
+            font-size: 0.85rem;
+            color: #6b8f97;
+            margin-bottom: 1.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+        }
+        .meta-line span {
+            background: #ecf5f7;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+        }
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.02rem;
+        }
+        .quote-block {
+            background: #f0f8fa;
+            border-left: 5px solid #2faab6;
+            padding: 1.2rem 1.6rem;
+            margin: 2rem 0 1.8rem 0;
+            border-radius: 0 20px 20px 0;
+            font-style: normal;
+            color: #1d4f5a;
+            box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
+        }
+        .quote-block::before {
+            content: "📌 记下 · ";
+            font-weight: 500;
+            color: #0b7e8c;
+        }
+        /* 双网格卡片细节 */
+        .grid-note {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 2rem 0 1.5rem 0;
+        }
+        .grid-item {
+            background: #f3fafc;
+            border-radius: 24px;
+            padding: 1.2rem 1.4rem;
+            border: 1px solid #cde4e9;
+            transition: transform 0.15s;
+        }
+        .grid-item:hover {
+            transform: translateY(-3px);
+            background: #ecf7fa;
+        }
+        .grid-item h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #11555f;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .grid-item p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            color: #2b5d67;
+        }
+        .faq-mini {
+            background: #f7fcfd;
+            border-radius: 24px;
+            padding: 1.2rem 1.8rem;
+            margin: 2rem 0 1.8rem 0;
+            border: 1px dashed #9ecfd7;
+        }
+        .faq-mini summary {
+            font-weight: 460;
+            color: #0b5f6b;
+            cursor: pointer;
+            padding: 0.3rem 0;
+            font-size: 1rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        .faq-mini summary::before {
+            content: "▸ ";
+            color: #2faab6;
+            font-size: 1.3rem;
+            margin-right: 6px;
+        }
+        .faq-mini details[open] summary::before {
+            content: "▾ ";
+        }
+        .faq-mini p {
+            margin: 0.8rem 0 0.2rem 0;
+            padding-left: 1.2rem;
+            border-left: 2px solid #b3d9e0;
+        }
+        .visit-sentence {
+            font-size: 1.1rem;
+            background: #e1f0f3;
+            padding: 1.2rem 1.8rem;
+            border-radius: 60px;
+            margin: 2.4rem 0 1rem 0;
+            text-align: center;
+            color: #0f4a54;
+            border: 1px solid #b7d9e0;
+            box-shadow: 0 2px 6px rgba(0,70,80,0.04);
+        }
+        .visit-sentence a {
+            color: #115f6b;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #71bec9;
+            padding-bottom: 1px;
+        }
+        .visit-sentence a:hover {
+            background: #c7e6ec;
+            border-bottom-color: #0b808e;
+        }
+        .footer-note {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: #5c838c;
+            text-align: center;
+            border-top: 1px solid #d4e6ea;
+            padding-top: 2rem;
+            letter-spacing: 0.3px;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #b7d8df, transparent);
+            margin: 1.8rem 0;
+        }
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            .content-card { padding: 1.5rem 1.2rem; }
+            h1 { font-size: 1.8rem; }
+            .grid-note { grid-template-columns: 1fr; }
+            .visit-sentence { font-size: 1rem; padding: 1rem 1.2rem; }
+            .meta-line { flex-direction: column; gap: 0.3rem; }
+            .quote-block { padding: 1rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="content-card">
+        <h1>再访 · 澳客</h1>
+        <div class="subhead">一次收藏，每次打开都是新的熟悉</div>
+        <div class="meta-line">
+            <span>📅 最近一次更新 · 2025</span>
+            <span>🏷️ 书签 · 持续关注</span>
+            <span>📌 来自日常笔记</span>
+        </div>
+
+        <p>浏览器里总有一些站点，值得反复打开。它们不是被推送来的，而是自己主动收藏的。<strong>澳客</strong>就是其中之一。第一次可能是无意间点进去，后来刻意把它存到了书签栏，每次再访都像翻开一本折了角的杂志——内容依旧新鲜，但界面和手感已经熟悉到不需要适应。</p>
+
+        <p>我习惯每过几周就回去看一眼，不是因为有什么必追的更新，而是那个地方的信息密度和语言节奏刚好对味。就像常去的咖啡店，不用看菜单也知道点的东西不会踩雷。对 <a class="accent" href="https://sporthub-aoke.com" style="font-weight:500; border-bottom:1px solid #71bec9; text-decoration:none;">澳客</a> 的好感，大概也来自这种稳定的质感。</p>
+
+        <div class="quote-block">
+            持续关注一件事，不是因为它时刻在变，而是因为每次回去都能找到当初收藏它的理由。
+        </div>
+
+        <p>比起漫无目的地刷新信息流，我更喜欢这种有指向的访问。不用每次重新评估，省下的注意力可以放在内容本身。澳客的页面不堆砌，也不故作冷淡，排版里有一种克制的呼吸感——标题、导语、正文之间的留白刚刚好，读起来不累。</p>
+
+        <!-- 网格卡片 -->
+        <div class="grid-note">
+            <div class="grid-item">
+                <h3>🔖 书签的意义</h3>
+                <p>不是所有链接都值得放进收藏夹。澳客是那种你愿意为它新建一个文件夹的网站——干净、专注、每次打开都有收获。</p>
+            </div>
+            <div class="grid-item">
+                <h3>📂 常驻标签页</h3>
+                <p>我的浏览器里有一个永远不关的标签页，属于澳客。偶尔点过去，即便不做什么，也觉得信息环境是清爽的。</p>
+            </div>
+            <div class="grid-item">
+                <h3>🔄 再次访问的节奏</h3>
+                <p>不需要提醒，每隔一段时间自然就会想去看看。没有强迫感，就像散步时习惯走同一条路，因为知道哪里好看。</p>
+            </div>
+            <div class="grid-item">
+                <h3>📎 收藏的连带记忆</h3>
+                <p>每次点击澳客的书签，都能想起第一次发现它时的场景。好的网站自带记忆锚点，让人愿意反复回来。</p>
+            </div>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-mini">
+            <details>
+                <summary>为什么要持续关注一个网站？</summary>
+                <p>持续关注不是负担，而是一种信息筛选后的信任。当你发现一个平台的内容质量始终在线、不浮躁、不夸张，它自然成为你数字生活里的一个固定坐标。澳客就扮演了这样的角色。</p>
+            </details>
+            <details style="margin-top: 0.6rem;">
+                <summary>收藏后会不会忘记？</summary>
+                <p>书签的意义不在于提醒，而在于给你一个主动返回的理由。即便隔了很久再点开，那种「还好存了」的感觉会抵消所有遗忘的遗憾。对于 <a href="https://sporthub-aoke.com" style="color:#115f6b; text-decoration:underline;">澳客</a> 来说，每次重访都是一次安心的确认。</p>
+            </details>
+        </div>
+
+        <!-- 访问句 自然嵌入链接 -->
+        <div class="visit-sentence">
+            📖 如果你也喜欢把好的站点留在手边，不妨把 <a href="https://sporthub-aoke.com">澳客</a> 放进你的书签栏。
+        </div>
+
+        <hr>
+
+        <p style="font-size:0.95rem; color:#3b6e78;">有时候，最好的访问不是第一次，而是第无数次。不用刻意记住，但每次打开浏览器，它就在那里。收藏夹里的澳客，像一本常读常新的册子，翻到哪页都是熟悉的气息。</p>
+
+        <p style="margin-top:1.2rem;">—— 来自一个习惯反复访问同一站点的日常记录。</p>
+    </div>
+
+    <div class="footer-note">
+        <span>✦ 持续关注 · 再访笔记 ✦</span><br>
+        <span style="opacity:0.7;">2025 · 澳客</span>
+    </div>
+</div>
+</body>
+</html>
