@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>球探 · 深度观察 · 赛场视野</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
+            background: #f2f0eb;
+            color: #1f2a36;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* hero 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0b141f 0%, #1a2a3a 100%);
+            color: #e2e9f0;
+            padding: 4.5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #c7944f, #dba564, #b07d3c);
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+        }
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #bccbd8;
+            max-width: 600px;
+            margin: 0 auto 1.2rem;
+            font-weight: 300;
+        }
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(255, 215, 150, 0.12);
+            border: 1px solid rgba(215, 175, 115, 0.25);
+            padding: 0.4rem 1.6rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #dbb78c;
+            letter-spacing: 1px;
+        }
+
+        /* 正文浅色区 */
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.8rem 1.8rem 3.2rem;
+        }
+
+        .intro-card {
+            background: #fffffffa;
+            border-radius: 24px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 20, 30, 0.03);
+            padding: 2rem 2.2rem 2.4rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .intro-card h2 {
+            font-size: 1.6rem;
+            font-weight: 450;
+            color: #1f2a36;
+            border-left: 5px solid #c7944f;
+            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .intro-card p {
+            margin-bottom: 1.1rem;
+            font-size: 1rem;
+            color: #25323e;
+        }
+
+        .intro-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin: 2rem 0 1.2rem;
+        }
+
+        .feature-item {
+            background: #f8f7f4;
+            border-radius: 18px;
+            padding: 1.5rem 1.6rem;
+            flex: 1 1 200px;
+            transition: background 0.2s, box-shadow 0.15s;
+            border: 1px solid #e8e5de;
+        }
+
+        .feature-item:hover {
+            background: #f0ede7;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .feature-item h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #2c3a46;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-item p {
+            font-size: 0.95rem;
+            color: #3a4b58;
+            margin-bottom: 0;
+        }
+
+        .highlight-link {
+            color: #b57d42;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .highlight-link:hover {
+            border-bottom: 1px solid #b57d42;
+            color: #8f632e;
+        }
+
+        .faq-mini {
+            background: #faf9f5;
+            border-radius: 20px;
+            padding: 1.6rem 2rem 1.8rem;
+            margin: 2rem 0 1rem;
+            border: 1px solid #e7e2d9;
+        }
+
+        .faq-mini h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #2c3a46;
+            margin-bottom: 1rem;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.7rem;
+            border-bottom: 1px dashed #ddd9cf;
+            padding-bottom: 0.5rem;
+        }
+
+        .faq-mini details summary {
+            font-weight: 450;
+            cursor: pointer;
+            color: #2c3a46;
+            padding: 0.2rem 0;
+            font-size: 1rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-mini details summary::before {
+            content: "▸";
+            color: #c7944f;
+            display: inline-block;
+            width: 1.5rem;
+            font-size: 1.1rem;
+            transition: transform 0.15s;
+        }
+
+        .faq-mini details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-mini details p {
+            margin: 0.5rem 0 0.2rem 1.5rem;
+            font-size: 0.94rem;
+            color: #3f4d5a;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2.8rem;
+            font-size: 0.95rem;
+            color: #5a6a77;
+            border-top: 1px solid #dcd6cb;
+            padding-top: 2rem;
+        }
+
+        .footer-note a {
+            color: #b57d42;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 3.2rem 1.2rem 3rem; }
+            .hero h1 { font-size: 1.9rem; }
+            .hero .sub { font-size: 1rem; }
+            .intro-card { padding: 1.5rem 1.2rem; }
+            .intro-card h2 { font-size: 1.35rem; }
+            .content-wrapper { padding: 1.8rem 1rem 2.4rem; }
+            .feature-grid { gap: 1rem; }
+            .feature-item { flex: 1 1 100%; }
+            .faq-mini { padding: 1.2rem 1.2rem; }
+        }
+
+        @media (max-width: 380px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero .tagline { font-size: 0.8rem; padding: 0.3rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 -->
+    <header class="hero">
+        <h1>球探 · 赛场观察者</h1>
+        <p class="sub">从边缘数据到核心视野，每一次分析都是对比赛更深一层的理解。</p>
+        <span class="tagline">⚡ 专注 · 客观 · 全景视角</span>
+    </header>
+
+    <!-- 正文浅色区 -->
+    <div class="content-wrapper">
+
+        <!-- 背景说明：第一段自然介绍 -->
+        <section class="intro-card">
+            <h2>从观察者到解读者</h2>
+            <p>现代足球情报体系早已超越单纯的比分记录。真正的“球探”工作，是在海量赛事中捕捉细微的战术变化、球员跑位习惯以及节奏转折点。无论业余爱好者还是资深分析师，都需要一个能沉淀观点、呈现脉络的窗口。<a href="https://cnzh-qiutanscore.com" class="highlight-link">球探</a>正是基于这种理念，尝试去梳理比赛背后的隐性线索。</p>
+            <p>我们关注的不是简单的胜负预测，而是如何用更系统的方法去理解场上发生的每一段博弈。从联赛格局到青训动态，很多有价值的信息往往藏在常规统计之外。</p>
+        </section>
+
+        <!-- 三段自然介绍：特点与场景 (融入卡片网格) -->
+        <section class="intro-card">
+            <h2>多维视角 · 贴近实战</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>节奏与倾向</h3>
+                    <p>通过时段表现、控球分布与压迫强度，尝试还原一支队伍的真实比赛倾向，而不被最终比分左右判断。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>球员轮廓</h3>
+                    <p>不仅仅是进球助攻，更关注无球移动、防守选位和传接球稳定性，这些细节往往定义了一名球员的上限。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>赛前氛围</h3>
+                    <p>伤病、轮换、旅途、天气……场外因素如何影响备战？我们收集可验证的信息，辅助形成更立体的赛前认知。</p>
+                </div>
+            </div>
+            <p style="margin-top: 0.8rem; font-size: 0.95rem; color: #3f4d5a;">每一个比赛日，都有新的故事线等待被发现。<a href="https://cnzh-qiutanscore.com" class="highlight-link">球探</a>希望提供一个讨论场，让观点和数据相互印证。</p>
+        </section>
+
+        <!-- FAQ 摘要 + 页尾访问提示 融合 -->
+        <section class="intro-card">
+            <h2>一些常被问到的</h2>
+            <div class="faq-mini">
+                <details>
+                    <summary>球探内容偏向哪种赛事？</summary>
+                    <p>覆盖欧洲主要联赛以及亚洲、南美部分重点赛事，同时关注青年国家队和次级联赛中的潜力股。范围会随赛季动态调整。</p>
+                </details>
+                <details>
+                    <summary>分析方法是主观还是客观？</summary>
+                    <p>我们尽量结合统计数据与长期观赛经验，每篇分析都会注明信息来源或判断依据，鼓励读者保持独立思考。</p>
+                </details>
+                <details>
+                    <summary>是否提供实时比分或赔率？</summary>
+                    <p>不侧重即时数据，而是沉淀后的赛事解读与趋势观察。比分只是背景，我们希望带出更多战术层面的讨论。</p>
+                </details>
+                <details>
+                    <summary>如何与<a href="https://cnzh-qiutanscore.com" class="highlight-link">球探</a>保持联系？</summary>
+                    <p>网站会持续更新赛事观察、专题文章和赛季回顾。您可以直接通过页面找到最新内容，也欢迎在社区留下自己的见解。</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- 页尾访问提示：自然句子，不含生硬指令 -->
+        <div class="footer-note">
+            <p>如果你也对赛场背后那些不易察觉的脉络感兴趣，不妨去 <a href="https://cnzh-qiutanscore.com">球探</a> 看看最近的分析与记录。每一场比赛都值得用更细致的方式去阅读。</p>
+            <p style="margin-top: 0.6rem; font-size: 0.85rem; color: #7f8d99;">—— 基于观察 · 不止于观察 ——</p>
+        </div>
+
+    </div>
+</body>
+</html>
